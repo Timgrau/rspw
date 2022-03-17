@@ -5,7 +5,10 @@
 > **Command Line Argument Tool for generating random passwords.**
 >> **Developed using Rust and crate [rand](https://github.com/rust-random/rand).**
 
-
+## Install using [cargo](https://doc.rust-lang.org/cargo/)
+```bash
+$ cargo install rspw
+```
 ## Usage
 Default generates a password with length 8:
 ```bash
