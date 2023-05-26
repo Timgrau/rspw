@@ -1,5 +1,6 @@
 use rspw::{Arguments, generate_password};
 
+//TODO: Tests need to be rewritten
 #[test]
 fn test_arguments_constructor() {
     let mut test_input = [
