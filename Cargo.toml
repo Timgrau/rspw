@@ -2,10 +2,10 @@
 name = "rspw"
 version = "0.1.0"
 edition = "2021"
-author = ["Timo Grautstück <timo.gr@hotmail.de>"]
-description = "A CLI password generator written in rust"
+authors = ["Timo G. <timo.gr@hotmail.de>"]
+description = "A command line password generator written in rust"
 readme = "README.md"
-keywords = ["password", "generator", "random", "rand", "cli"]
+keywords = ["password", "generator", "random", "rand", "cli", "clap"]
 categories = ["command-line-utilities"]
 license = "MIT"
 homepage = "https://github.com/Timgrau/rspw"
@@ -14,3 +14,4 @@ repository = "https://github.com/Timgrau/rspw"
 
 [dependencies]
 rand = "0.8.5"
+clap = {version = "4.3.0", features = ["derive"]}
