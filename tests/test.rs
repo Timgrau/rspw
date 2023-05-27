@@ -1,44 +1,27 @@
-use rspw::{Arguments, generate_password};
+use rspw::{Arguments};
 
-//TODO: Tests need to be rewritten
+//TODO: All tests need to be rewritten
 #[test]
-fn test_arguments_constructor() {
-    let mut test_input = [
-        "gen".to_string(),
-        "".to_string(),
-    ];
+fn test_init() {    
+    /*let args = Arguments::init();
     
-    // Default length -> 8
-    let args = Arguments::new(&test_input[0], &test_input[1]);
-     
-    assert_eq!(args.get_query(), test_input[0]);
-    assert_eq!(args.get_length(), "8");
-
-    // Any length 
-    test_input[1] = "40".to_string();
-    let args = Arguments::new(&test_input[0], &test_input[1]);
-    
-    assert_eq!(args.get_query(), test_input[0]);
-    assert_eq!(args.get_length(), "40");
+    assert_eq!(args, ...);*/
 }
 
 #[test]
-fn test_generate_password() {
+fn test_generate_passwd() {
     let mut test_input = [
-        "gen".to_string(),
-        "40".to_string()
+        "-l=12".to_string(),
+        "-s".to_string()
     ];
     
-    let test_args = Arguments::new(test_input[0], test_input[1]);
-    assert_eq!(generate_password(test_args).unwrap().len(), 40);
+    let args = Arguments::init();
+    assert_eq!(args.generate_passwd().unwrap().len(), 12);
     
     // Max length
-    test_input[1] = "64".to_string();
-    let test_args = Arguments::new(test_input[0], test_input[1]);
-    assert_eq!(generate_password(test_args).unwrap().len(), 64);
+    let args = Arguments::init();
+    test_input[0] = "-l=64".to_string();
+    assert_eq!(args.generate_passwd().unwrap().len(), 64);
 
-    // Default length
-    test_input[1] = "".to_string();
-    let test_args = Arguments::new(test_input[0], test_input[1]);
-    assert_eq!(generate_password(test_args).unwrap().len(), 8);
+    // Test for right error on wrong range
 }

@@ -1,24 +1,26 @@
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 [![rand](https://img.shields.io/badge/rand-v0.8.5-orange?style=flat-square)](https://crates.io/crates/rand)
-# rspw (rust-password)
+[![clap](https://img.shields.io/badge/clap-v4.3.0-orange?style=flat-square)](https://crates.io/crates/clap)
 
+# rspw (rust-password)
 > **Command Line Argument Tool for generating random passwords.**
->> **Developed using Rust and crate [rand](https://github.com/rust-random/rand).**
+>> **Developed using Rust and crate [rand](https://github.com/rust-random/rand) & [clap](https://github.com/clap-rs/clap)**
 
 ## Install using [cargo](https://doc.rust-lang.org/cargo/)
 ```bash
 $ cargo install rspw
 ```
+
 ## Usage
-Default generates a password with length 8:
-```bash
-$ rspw gen 
-> dK7VgAz9
-```
 Length can be chosen from 6-64:
 ```bash
-$ rspw gen 32
-> kGk4z2oZ2RXkwrbY68Ru4TJtAk0Rz2nq
+$ rspw -l 32
+> 6Og8mOtGQyfwyA8SxfdasXX3gvGfiiaT
+```
+Special characters with `-s` flag:
+```bash
+$ rspw -l=12 -s
+> 7b%TfAn~qIdS
 ```
 
 ## TODO
