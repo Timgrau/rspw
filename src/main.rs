@@ -1,16 +1,17 @@
-use rspw::{Arguments};
+use rspw::Arguments;
 use std::process;
+use cli_clipboard::{ClipboardContext, ClipboardProvider};
 
 /*
 Name: rust-cli-password-generator
 command : rspw
 length: 8-64
-usage: rspw -l 16 -s
+usage: rspw -l 16 -s -c 
 
 TODO:
-   1. Write password into a selected file :: rspw -l 8 example.txt
-   2. Put password on the clipboard :: rspw -c -l=8 -s
-   3. Rewrite tests
+   1. Write password into a selected file :: rspw -l 8 --file=example.txt
+   2. Put password on the clipboard for just 30 s
+   2. Rewrite tests
  */
 
 fn main() {
@@ -21,5 +22,18 @@ fn main() {
         process::exit(1);
     });
 
-    println!("{}", password);
+    if input.clipboard {
+        clip_passwd(password);
+    } else {
+        println!("{}", password);
+    }
+}
+
+fn clip_passwd(password: String) {
+    let mut ctx = ClipboardContext::new().unwrap();
+    ctx.set_contents(password.to_owned()).unwrap();
+    ctx.get_contents().unwrap();
+    /* 2. TODO here
+    ctx.clear().unwrap();
+    ctx.get_contents().unwrap();*/
 }

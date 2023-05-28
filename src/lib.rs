@@ -1,8 +1,7 @@
 use rand::rngs::OsRng;
 use rand::Rng;
-use rand::distributions::Alphanumeric;
+use rand::distributions::{Alphanumeric, Distribution};
 use clap::Parser;
-use rand::distributions::Distribution;
 
 pub struct Special;
 impl Distribution<u8> for Special {
@@ -27,6 +26,10 @@ pub struct Arguments {
     /// special characters 
     #[arg(short, long)]
     special: bool,
+    
+    /// Copy password onto the clipboard
+    #[arg(short)]
+    pub clipboard: bool,
 }
 
 impl Arguments {
@@ -34,7 +37,7 @@ impl Arguments {
         Arguments::parse()
     }
 
-    pub fn generate_passwd(self) -> Result<String, &'static str> {
+    pub fn generate_passwd(&self) -> Result<String, &'static str> {
         if self.length < 6 || self.length > 64 {
             return Err("Second Argument needs to be a number in range [6, 64] e.g. 'rspw -l 16'.");
         }
