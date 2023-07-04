@@ -9,8 +9,7 @@ length: 8-64
 usage: rspw -l 16 -s -c 
 
 TODO:
-   1. Write password into a selected file :: rspw -l 8 --file=example.txt
-   2. Put password on the clipboard for just 30 s
+   1. Put password on the clipboard for just 30 s, like unix pass.
    2. Rewrite tests
  */
 
@@ -33,7 +32,7 @@ fn clip_passwd(password: String) {
     let mut ctx = ClipboardContext::new().unwrap();
     ctx.set_contents(password.to_owned()).unwrap();
     ctx.get_contents().unwrap();
-    /* 2. TODO here
+    /* 1. TODO here -- maybe daemon needet
     ctx.clear().unwrap();
     ctx.get_contents().unwrap();*/
 }

@@ -9,7 +9,8 @@ impl Distribution<u8> for Special {
         const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
                                  abcdefghijklmnopqrstuvwxyz\
                                  0123456789\
-                                 !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+                                 !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\
+                                 \x20";
         
         // Using uniform distribution
         return CHARSET[rng.gen_range(0..CHARSET.len())]
