@@ -35,10 +35,10 @@ pub struct Arguments {
 }
 
 impl Arguments {
-    /** 
-       Arguments init functions are just wrapper for `parse()` and
-       `parse_from()`, so `clap::Parser` is just needet in this file
-     */
+    /**
+      Arguments init functions are just wrapper for `parse()` and
+      `parse_from()`, so `clap::Parser` is just needet in this file
+    */
     pub fn init() -> Self {
         Arguments::parse()
     }
@@ -46,8 +46,8 @@ impl Arguments {
     pub fn init_daemon<I, T>(itr: I) -> Self
     where
         I: IntoIterator<Item = T>,
-        T: Into<OsString> + Clone {
-
+        T: Into<OsString> + Clone,
+    {
         Arguments::parse_from(itr)
     }
 
