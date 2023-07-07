@@ -15,4 +15,5 @@ repository = "https://github.com/Timgrau/rspw"
 [dependencies]
 rand = "0.8.5"
 clap = {version = "4.3.0", features = ["derive"]}
-cli-clipboard = "0.4.0"
+arboard = "3.2.0"
+itertools = "0.11.0"
