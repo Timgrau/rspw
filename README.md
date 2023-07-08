@@ -6,6 +6,7 @@
 > **Command Line Argument Tool for generating random passwords.**
 >> **Developed using Rust and crate [rand](https://github.com/rust-random/rand) & [clap](https://github.com/clap-rs/clap)**
 
+
 ## Install using [cargo](https://doc.rust-lang.org/cargo/)
 ```bash
 $ cargo install rspw
