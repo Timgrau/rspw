@@ -1,6 +1,6 @@
 use rspw::Arguments;
 
-//TODO: All tests need to be rewritten
+// TODO: All tests need to be rewritten
 #[test]
 fn test_init() {
     /*let args = Arguments::init();
