@@ -1,6 +1,6 @@
 [package]
 name = "rspw"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 authors = ["Timo G. <timo.gr@hotmail.de>"]
 description = "A command line password generator written in rust"
@@ -17,3 +17,6 @@ rand = "0.8.5"
 clap = {version = "4.3.0", features = ["derive"]}
 arboard = "3.2.0"
 itertools = "0.11.0"
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.

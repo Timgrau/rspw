@@ -22,6 +22,11 @@ Special characters with `-s` flag:
 $ rspw -l=12 -s
 > 7b%TfAn~qIdS
 ```
+Password can be attached to the clipboard for 30 s (Linux):
+```bash
+$ rspw -l=64 -s -c
+> Password will be copied on the clipboard, clears in 30 seconds.
+```
 
 ## TODO
 See [main](src/main.rs), feel free to contribute.

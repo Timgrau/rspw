@@ -84,7 +84,7 @@ fn rspw_clipboard(password: String) -> Result<(), ()> {
 fn spawn_rspw_daemon() {
     // 1. TODO: Implement further OS
     println!(
-        "Trying to put password on the clipboard for {} seconds.",
+        "Password will be copied on the clipboard, clears in {} seconds.",
         SLEEP_TIME
     );
     if cfg!(target_os = "linux") {
