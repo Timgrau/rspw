@@ -37,7 +37,7 @@ pub struct Arguments {
 impl Arguments {
     /**
       Arguments init functions are just wrapper for `parse()` and
-      `parse_from()`, so `clap::Parser` is just needet in this file
+      `parse_from()`, so `clap::Parser` is just used in this file.
     */
     pub fn init() -> Self {
         Arguments::parse()
@@ -50,7 +50,10 @@ impl Arguments {
     {
         Arguments::parse_from(itr)
     }
-
+    /**
+      Logic/Function to generate the password, considers special
+      characters if `-s | --special` flag was specified.
+    */
     pub fn generate_passwd(&self) -> Result<String, &'static str> {
         if self.length < 6 || self.length > 64 {
             return Err("Second Argument needs to be a number in range [6, 64] e.g. 'rspw -l 16'.");
