@@ -7,7 +7,7 @@ use regex::Regex;
 fn test_no_input() {
     let mut cmd = Command::cargo_bin("rspw").unwrap();
     cmd.assert().failure();
-} 
+}
 
 #[test]
 fn test_generate_passwd() {
@@ -20,7 +20,7 @@ fn test_generate_passwd() {
 
 fn test_generate_password_length_pattern(length: u8, pattern: &str) {
     let length_str = &length.to_string();
-    
+
     let mut cmd = Command::cargo_bin("rspw").unwrap();
     let output = cmd.args(&["-l", length_str]).output().unwrap();
     let stdout_str = str::from_utf8(&output.stdout).unwrap().trim();
@@ -28,5 +28,5 @@ fn test_generate_password_length_pattern(length: u8, pattern: &str) {
     let pattern = format!(r"{}{{{}}}$", pattern, length);
     let re = Regex::new(&pattern).unwrap();
     assert_eq!(stdout_str.len(), length.into());
-    assert!(re.is_match(stdout_str)); 
+    assert!(re.is_match(stdout_str));
 }
