@@ -1,5 +1,4 @@
 use arboard::Clipboard;
-use itertools::Itertools;
 use rspw::Arguments;
 use std::{
     env::{self, args, args_os},
@@ -47,7 +46,8 @@ fn main() {
 */
 fn check_rspw_daemon() -> Arguments {
     if args().nth(args_os().len() - 1).as_deref() == Some(DAEMONIZE) {
-        Arguments::init_daemon(args_os().dropping_back(1))
+        // Arguments::init_daemon(args_os().dropping_back(1))
+        Arguments::init()
     } else {
         Arguments::init()
     }

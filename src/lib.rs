@@ -36,7 +36,7 @@ pub struct Arguments {
 
 impl Arguments {
     /**
-      Arguments init functions are just wrapper for `parse()` and
+      Arguments init functions is just a wrapper for `parse()` and
       `parse_from()`, so `clap::Parser` is just used in this file.
     */
     pub fn init() -> Self {

@@ -1,24 +1,32 @@
-use rspw::Arguments;
+use core::str;
 
-// TODO: All tests need to be rewritten
+use assert_cmd::Command;
+use regex::Regex;
+
 #[test]
-fn test_init() {
-    /*let args = Arguments::init();
-
-    assert_eq!(args, ...);*/
-}
+fn test_no_input() {
+    let mut cmd = Command::cargo_bin("rspw").unwrap();
+    cmd.assert().failure();
+} 
 
 #[test]
 fn test_generate_passwd() {
-    let mut test_input = ["-l=12".to_string(), "-s".to_string()];
+    let pattern = "^[a-zA-Z0-9]";
 
-    let args = Arguments::init();
-    assert_eq!(args.generate_passwd().unwrap().len(), 12);
+    for i in 8..=64 {
+        test_generate_password_length_pattern(i, pattern);
+    }
+}
 
-    // Max length
-    let args = Arguments::init();
-    test_input[0] = "-l=64".to_string();
-    assert_eq!(args.generate_passwd().unwrap().len(), 64);
+fn test_generate_password_length_pattern(length: u8, pattern: &str) {
+    let length_str = &length.to_string();
+    
+    let mut cmd = Command::cargo_bin("rspw").unwrap();
+    let output = cmd.args(&["-l", length_str]).output().unwrap();
+    let stdout_str = str::from_utf8(&output.stdout).unwrap().trim();
 
-    // Test for right error on wrong range
+    let pattern = format!(r"{}{{{}}}$", pattern, length);
+    let re = Regex::new(&pattern).unwrap();
+    assert_eq!(stdout_str.len(), length.into());
+    assert!(re.is_match(stdout_str)); 
 }
