@@ -1,7 +1,7 @@
 use arboard::Clipboard;
 use rspw::Arguments;
 use std::{
-    env::{self, args, args_os},
+    env::{self, args_os},
     ffi::OsString,
     process, thread, time,
 };
@@ -24,7 +24,8 @@ const DAEMONIZE: &str = "__rspw_daemon";
 const SLEEP_TIME: u64 = 30;
 
 fn main() {
-    let input = check_rspw_daemon();
+    let is_daemon = args_os().last().as_deref() == Some(DAEMONIZE.as_ref());
+    let input = Arguments::init_daemon(args_os().filter(|arg| arg != DAEMONIZE));
 
     if input.clipboard {
         spawn_rspw_daemon();
@@ -33,25 +34,14 @@ fn main() {
             println!("Password cant be generated: {}", err);
             process::exit(1);
         });
-        if args().nth(args_os().len() - 1).as_deref() == Some(DAEMONIZE) {
+        if is_daemon {
             let _ = rspw_clipboard(password);
         } else {
             println!("{}", password);
         }
     }
 }
-/**
-  Needet to check if the clipboard daemon is running,
-  if not we start processing the input arguments.
-*/
-fn check_rspw_daemon() -> Arguments {
-    if args().nth(args_os().len() - 1).as_deref() == Some(DAEMONIZE) {
-        // Arguments::init_daemon(args_os().dropping_back(1))
-        Arguments::init()
-    } else {
-        Arguments::init()
-    }
-}
+
 /**
    Put the password on the clipboard and clear the clipboard after
    the proc has slept for `SLEEP_TIME`. Seems like this needs to return
