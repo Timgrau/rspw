@@ -13,7 +13,7 @@ impl Distribution<u8> for Special {
                                  !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
         // Using uniform distribution
-        return CHARSET[rng.random_range(0..CHARSET.len())]
+        return CHARSET[rng.random_range(0..CHARSET.len())];
     }
 }
 
