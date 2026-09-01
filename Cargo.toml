@@ -16,7 +16,7 @@ repository = "https://github.com/Timgrau/rspw"
 rand = "0.10.2"
 clap = {version = "4.3.0", features = ["derive"]}
 arboard = "3.2.0"
-itertools = "0.11.0"
+itertools = "0.15.0"
 assert_cmd = "2.0.15"
 regex = "1.10.5"
 
