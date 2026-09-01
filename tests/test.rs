@@ -14,15 +14,29 @@ fn test_generate_passwd() {
     let pattern = "^[a-zA-Z0-9]";
 
     for i in 8..=64 {
-        test_generate_password_length_pattern(i, pattern);
+        test_generate_password_length_pattern(i, pattern, false);
     }
 }
 
-fn test_generate_password_length_pattern(length: u8, pattern: &str) {
-    let length_str = &length.to_string();
+#[test]
+fn test_generate_passwd_special() {
+    let pattern = r##"^[a-zA-Z0-9!"#$%&'()*+,\-./:;<=>?@\[\\\]\^_`{|}~ ]"##;
 
+    for i in 8..=64 {
+        test_generate_password_length_pattern(i, pattern, true);
+    }
+}
+
+fn test_generate_password_length_pattern(length: u8, pattern: &str, special: bool) {
+    let length_str = &length.to_string();
     let mut cmd = Command::cargo_bin("rspw").unwrap();
-    let output = cmd.args(&["-l", length_str]).output().unwrap();
+
+    let mut args = vec!["-l", length_str];
+    if special {
+        args.push("-s");
+    }
+
+    let output = cmd.args(&args).output().unwrap();
     let stdout_str = str::from_utf8(&output.stdout).unwrap().trim();
 
     let pattern = format!(r"{}{{{}}}$", pattern, length);
