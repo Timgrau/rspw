@@ -1,7 +1,8 @@
 [package]
 name = "rspw"
-version = "0.2.2"
-edition = "2021"
+version = "0.2.3"
+edition = "2024"
+rust-version = "1.85"
 authors = ["Timo G. <timo.gr@hotmail.de>"]
 description = "A command line password generator written in rust"
 readme = "README.md"
