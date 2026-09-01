@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
-[![rand](https://img.shields.io/badge/rand-v0.8.5-orange?style=flat-square)](https://crates.io/crates/rand)
+[![rand](https://img.shields.io/badge/rand-v0.10.2-orange?style=flat-square)](https://crates.io/crates/rand)
 [![clap](https://img.shields.io/badge/clap-v4.3.0-orange?style=flat-square)](https://crates.io/crates/clap)
 
 # rspw (rust-password)

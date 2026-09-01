@@ -1,7 +1,7 @@
 use clap::Parser;
-use rand::distributions::{Alphanumeric, Distribution};
-use rand::rngs::OsRng;
-use rand::Rng;
+use rand::distr::{Alphanumeric, Distribution};
+use rand::rngs::{StdRng, SysRng};
+use rand::{Rng, RngExt, SeedableRng};
 use std::ffi::OsString;
 
 pub struct Special;
@@ -13,7 +13,7 @@ impl Distribution<u8> for Special {
                                  !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
         // Using uniform distribution
-        return CHARSET[rng.gen_range(0..CHARSET.len())];
+        return CHARSET[rng.random_range(0..CHARSET.len())]
     }
 }
 
@@ -58,15 +58,18 @@ impl Arguments {
             return Err("Second Argument needs to be a number in range [6, 64] e.g. 'rspw -l 16'.");
         }
 
+        let mut rng = StdRng::try_from_rng(&mut SysRng)
+            .expect("failed to seed StdRng from the operating system");
+
         if !self.special {
-            Ok(OsRng
-                .sample_iter(&Alphanumeric)
+            Ok(Alphanumeric
+                .sample_iter(&mut rng)
                 .take(self.length as usize)
                 .map(char::from)
                 .collect())
         } else {
-            Ok(OsRng
-                .sample_iter(&Special)
+            Ok(Special
+                .sample_iter(&mut rng)
                 .take(self.length as usize)
                 .map(char::from)
                 .collect())
